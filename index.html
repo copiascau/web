@@ -1,26 +1,3 @@
-<?php
-// Asigna nombres a los IDs de Telegram
-$usernames = [
-    "690137324" => "ruben.cuello",
-    "279601369" => "adrian.sanchez"
-];
-
-// Endpoint para procesar solicitudes AJAX
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Obtiene y valida el ID del usuario enviado desde el cliente
-    $input = json_decode(file_get_contents('php://input'), true);
-    $user_id = $input['user_id'] ?? null;
-
-    // Respuesta con el nombre correspondiente o "Guest" si no coincide
-    $response = [
-        'username' => $user_id && isset($usernames[$user_id]) ? $usernames[$user_id] : 'No permitido',
-        'is_authorized' => $user_id && isset($usernames[$user_id]) // Devuelve si el ID es válido
-    ];
-    header('Content-Type: application/json');
-    echo json_encode($response);
-    exit;
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
